@@ -11,6 +11,7 @@
 		E2E35C39293E645800D5F0E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* ContentView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
 		E2E35C3E293E645900D5F0E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */; };
+		E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C45293E6F3600D5F0E3 /* ScreenCapture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		E2E35C3A293E645900D5F0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E2E35C3F293E645900D5F0E3 /* coolshot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = coolshot.entitlements; sourceTree = "<group>"; };
+		E2E35C45293E6F3600D5F0E3 /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				E2E35C3A293E645900D5F0E3 /* Assets.xcassets */,
 				E2E35C3F293E645900D5F0E3 /* coolshot.entitlements */,
 				E2E35C3C293E645900D5F0E3 /* Preview Content */,
+				E2E35C45293E6F3600D5F0E3 /* ScreenCapture.swift */,
 			);
 			path = coolshot;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E35C39293E645800D5F0E3 /* ContentView.swift in Sources */,
+				E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */,
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
