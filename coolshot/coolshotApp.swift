@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Security
+import UserNotifications
 
 @main
 struct coolshotApp: App {
@@ -14,7 +15,7 @@ struct coolshotApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EditorView()
         }
     }
 }
@@ -23,5 +24,9 @@ struct coolshotApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("Launched")
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { (status, _) in
+            
+        }
     }
 }

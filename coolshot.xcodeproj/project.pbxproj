@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
-		E2E35C39293E645800D5F0E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* ContentView.swift */; };
+		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
 		E2E35C3E293E645900D5F0E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */; };
 		E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C45293E6F3600D5F0E3 /* ScreenCapture.swift */; };
+		E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E618102946038C00CF1EAF /* EditorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E2E35C33293E645800D5F0E3 /* coolshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coolshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
-		E2E35C38293E645800D5F0E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		E2E35C3A293E645900D5F0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E2E35C3F293E645900D5F0E3 /* coolshot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = coolshot.entitlements; sourceTree = "<group>"; };
 		E2E35C45293E6F3600D5F0E3 /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
+		E2E618102946038C00CF1EAF /* EditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +56,9 @@
 		E2E35C35293E645800D5F0E3 /* coolshot */ = {
 			isa = PBXGroup;
 			children = (
+				E2E6180F2946036800CF1EAF /* ViewModel */,
 				E2E35C36293E645800D5F0E3 /* coolshotApp.swift */,
-				E2E35C38293E645800D5F0E3 /* ContentView.swift */,
+				E2E35C38293E645800D5F0E3 /* EditorView.swift */,
 				E2E35C3A293E645900D5F0E3 /* Assets.xcassets */,
 				E2E35C3F293E645900D5F0E3 /* coolshot.entitlements */,
 				E2E35C3C293E645900D5F0E3 /* Preview Content */,
@@ -70,6 +73,14 @@
 				E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E2E6180F2946036800CF1EAF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E2E618102946038C00CF1EAF /* EditorViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2E35C39293E645800D5F0E3 /* ContentView.swift in Sources */,
+				E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */,
 				E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */,
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
+				E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
