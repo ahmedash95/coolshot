@@ -16,7 +16,6 @@ class EditorViewModel {
     let gradientObjects: [[Color]] = [
         [.red, .green, .blue],
         [.orange, .purple, .yellow],
-        [.pink, .gray, .black],
         [.red, .orange],
         [.yellow, .green],
         [.blue, .purple],
@@ -61,7 +60,6 @@ class EditorViewModel {
     
     @MainActor func getImageFromView(view: some View) -> NSImage? {
         let renderer = ImageRenderer(content: view)
-        renderer.scale = 2.0
         
         return renderer.nsImage
     }
