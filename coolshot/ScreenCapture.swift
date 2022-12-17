@@ -16,7 +16,7 @@ class ScreenCapture {
     func screenshotWindowAndSuccess() -> Bool {
         let task = Process()
         task.launchPath = "/usr/sbin/screencapture"
-        task.arguments = ["-cir"]
+        task.arguments = ["-ci"]
         task.launch()
         task.waitUntilExit()
         let status = task.terminationStatus

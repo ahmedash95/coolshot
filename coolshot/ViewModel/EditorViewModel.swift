@@ -71,7 +71,7 @@ class EditorViewModel {
 
         
         let savePanel = NSSavePanel()
-        savePanel.allowedContentTypes = [.png]
+        savePanel.allowedContentTypes = [.png,.jpeg]
         savePanel.canCreateDirectories = true
         savePanel.isExtensionHidden = false
         savePanel.title = "Save your image"
