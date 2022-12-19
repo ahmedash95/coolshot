@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2020BAC294A50D200997CBF /* ColorPickerView.swift */; };
+		E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CA0E52950C1B500A7B7EE /* Arrow.swift */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		E2020BAC294A50D200997CBF /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		E27CA0E52950C1B500A7B7EE /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* coolshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coolshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
 		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E27CA0E42950C1A700A7B7EE /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				E27CA0E52950C1B500A7B7EE /* Arrow.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		E2E35C2A293E645800D5F0E3 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 		E2E35C35293E645800D5F0E3 /* coolshot */ = {
 			isa = PBXGroup;
 			children = (
+				E27CA0E42950C1A700A7B7EE /* Shapes */,
 				E2E6180F2946036800CF1EAF /* ViewModel */,
 				E2E35C36293E645800D5F0E3 /* coolshotApp.swift */,
 				E2E35C38293E645800D5F0E3 /* EditorView.swift */,
@@ -161,6 +172,7 @@
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
 				E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */,
 				E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */,
+				E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

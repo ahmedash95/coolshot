@@ -60,8 +60,9 @@ class EditorViewModel {
     
     @MainActor func getImageFromView(view: some View) -> NSImage? {
         let renderer = ImageRenderer(content: view)
+        renderer.scale = 2.0
         
-        return renderer.nsImage
+        return renderer.nsImage!
     }
     
     func showSavePanel() -> URL? {
