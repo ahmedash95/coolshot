@@ -38,16 +38,22 @@ struct ShapeDetails: Hashable {
 
 
 struct EditorView: View {
+    var editorViewModel = EditorViewModel()
+    
+    
     @State private var image = NSImage(named: "out")
-    @State private var selectedGradientIndex = 0
+    @State private var selectedColors = [Color.red, Color.green, Color.blue]
     
     @State private var thickness: Double = 3.0
+    @State private var padding: Double = 20.0
+    @State private var cornerRadius: Double = 20.0
+
+
     @State private var selectedColor: Color = .white
     @State private var shapeFill = false
     @State private var isDragging: Bool = false
-    @State private var shapeType: ShapeType = .rectangle
-    
-    var editorViewModel = EditorViewModel()
+    @State private var shapeType: ShapeType = .arrow
+
     
     @State private var shapes: [ShapeDetails] = []
     @State private var currentShape: ShapeDetails = ShapeDetails()
@@ -57,15 +63,15 @@ struct EditorView: View {
             
             ZStack {
                 LinearGradient(
-                    gradient: Gradient(colors: editorViewModel.gradientObjects[selectedGradientIndex]),
+                    gradient: Gradient(colors: self.selectedColors),
                    startPoint: .topLeading,
                    endPoint: .bottomTrailing)
                 
                 Image(nsImage: image!)
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(20)
-                    .padding(20)
+                    .cornerRadius(self.cornerRadius)
+                    .padding(self.padding)
             }
             
             
@@ -137,77 +143,137 @@ struct EditorView: View {
     }
     
     var body: some View {
-        VStack {
-            editorView
-            
-            // Buttons
-            HStack {
-                Button("Take") {
-                    image = editorViewModel.takeScreenShot()
-                }
+        HStack {
+            VStack {
+                editorView
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
-                Button("Copy ⌘C") {
-                    editorViewModel.copyToClipboard(view: editorView)
-                }.keyboardShortcut("C")
-                
-                Button("Save ⌘S") {
-                    editorViewModel.saveToFile(view: editorView)
-                }.keyboardShortcut("S")
-                
-                Button("Undo ⌘Z") {
-                    if shapes.count == 0 {
-                        return
+                HStack {
+                    Button(action: {
+                        image = editorViewModel.takeScreenShot()
+                    }) {
+                        Text("Take")
+                            .padding([.top,.bottom], 20)
                     }
                     
-                    _ = shapes.popLast()
-                }.keyboardShortcut("Z")
-                
-                Button("Shapes \(shapes.count)"){}
-                
-            }.padding([.top, .bottom], 10)
-            
-            // Canvas controller
-            HStack {
-                Slider(value: $thickness, in: 1...20) {
-                    Text("Thickness")
-                }.frame(maxWidth: 200)
-                    .onChange(of: thickness) { newThickness in
-                        self.thickness = newThickness
-                    }
-                Toggle("Fill", isOn: self.$shapeFill)
-                Divider()
-                .pickerStyle(RadioGroupPickerStyle())
-                .frame(width: 100, height: 100)
-                Divider()
-                Button("Rectangle") {
-                    shapeType = ShapeType.rectangle
+                    Button("Copy ⌘C") {
+                        editorViewModel.copyToClipboard(view: editorView)
+                    }.keyboardShortcut("C")
+                    
+                    Button("Save ⌘S") {
+                        editorViewModel.saveToFile(view: editorView)
+                    }.keyboardShortcut("S")
+                    
+                    Button("Undo ⌘Z") {
+                        if shapes.count == 0 {
+                            return
+                        }
+                        
+                        _ = shapes.popLast()
+                    }.keyboardShortcut("Z")
                 }
-                
-                Button("Arrow") {
-                    shapeType = ShapeType.arrow
-                }
-                Divider()
-                ColorPickerView(selectedColor: self.$selectedColor)
-                    .onChange(of: self.selectedColor) { newColor in
-                        print(newColor)
-                        self.selectedColor = newColor
-                    }
-            }.frame(height: 50)
-            
-            // Backgrounds
-            HStack {
-                ForEach(0..<editorViewModel.gradientObjects.count, id: \.self) { i in
-                    let go = editorViewModel.gradientObjects[i]
-                    LinearGradient(
-                        gradient: Gradient(colors: go),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing)
-                    .gesture(TapGesture().onEnded{
-                        selectedGradientIndex = i
-                    })
-                    .frame(width: 50, height: 50)
-                }
+                .padding([.top, .bottom], 10)
+                .frame(height: 50)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Divider()
+            
+                VStack {
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            Text("Shape")
+                            
+                            HStack {
+                                Image(systemName: "arrow.up.right")
+                                    .frame(width: 50, height: 25)
+                                    .foregroundColor(Color.white)
+                                    .background(shapeType == ShapeType.arrow ? Color.black : Color.gray)
+                                    .padding(3)
+                                    .border(.gray, width: 2)
+                                    .gesture(TapGesture().onEnded{
+                                        shapeType = ShapeType.arrow
+                                    })
+                                
+                                Image(systemName: "rectangle")
+                                    .frame(width: 50, height: 25)
+                                    .foregroundColor(Color.white)
+                                    .background(shapeType == ShapeType.rectangle ? Color.black : Color.gray)
+                                    .padding(3)
+                                    .border(.gray, width: 2)
+                                    .gesture(TapGesture().onEnded{
+                                        shapeType = ShapeType.rectangle
+                                    })
+                            }.padding(.bottom, 20)
+                            
+                            Group {
+                                Text("Thickness")
+                                Slider(value: $thickness, in: 1...20).frame(maxWidth: 200)
+                                    .onChange(of: thickness) { newThickness in
+                                        self.thickness = newThickness
+                                    }
+                            }
+                            
+                            Toggle("Fill", isOn: self.$shapeFill)
+                                .pickerStyle(RadioGroupPickerStyle())
+                            
+                            ColorPickerView(selectedColor: self.$selectedColor)
+                                .padding(.vertical, 10)
+                                .onChange(of: self.selectedColor) { newColor in
+                                    print(newColor)
+                                    self.selectedColor = newColor
+                                }
+                            
+                            
+                            Group {
+                                Text("Background")
+                                    .bold()
+                                    .padding(.top, 30)
+                                Divider()
+                            }
+                            
+                            Group {
+                                Text("Padding")
+                                Slider(value: $padding, in: 1...100).frame(maxWidth: 200)
+                                    .onChange(of: padding) { val in
+                                        self.padding = val
+                                    }
+                            }
+                            
+                            Group {
+                                Text("Corner Radius")
+                                Slider(value: $cornerRadius, in: 1...100).frame(maxWidth: 200)
+                                    .onChange(of: cornerRadius) { val in
+                                        self.cornerRadius = val
+                                    }
+                            }
+                        }
+                        
+                        // Backgrounds
+                        HStack {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 10) {
+                                ForEach(editorViewModel.gradientObjects, id: \.self) { go in
+                                    LinearGradient(
+                                        gradient: Gradient(colors: go),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing)
+                                    .frame(width: 40, height: 40)
+                                    .border(.black, width: 0.5)
+                                    .cornerRadius(5)
+                                    .gesture(TapGesture().onEnded{
+                                        selectedColors = go
+                                    })
+                                }
+                            }
+                            .padding([.trailing, .bottom], 10)
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                .frame(width: 250)
+                .clipped()
         }
     }
 }

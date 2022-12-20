@@ -28,6 +28,7 @@ class EditorViewModel {
         [.gray, .red],
         [.white, .white],
         [.black, .black],
+        [.clear],
     ]
     
     func takeScreenShot() -> NSImage {
