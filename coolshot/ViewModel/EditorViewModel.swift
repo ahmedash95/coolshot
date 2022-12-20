@@ -16,7 +16,6 @@ class EditorViewModel {
     let gradientObjects: [[Color]] = [
         [.red, .green, .blue],
         [.orange, .purple, .yellow],
-        [.pink, .gray, .black],
         [.red, .orange],
         [.yellow, .green],
         [.blue, .purple],
@@ -29,6 +28,7 @@ class EditorViewModel {
         [.gray, .red],
         [.white, .white],
         [.black, .black],
+        [.clear],
     ]
     
     func takeScreenShot() -> NSImage {
@@ -63,7 +63,7 @@ class EditorViewModel {
         let renderer = ImageRenderer(content: view)
         renderer.scale = 2.0
         
-        return renderer.nsImage
+        return renderer.nsImage!
     }
     
     func showSavePanel() -> URL? {
@@ -73,7 +73,7 @@ class EditorViewModel {
 
         
         let savePanel = NSSavePanel()
-        savePanel.allowedContentTypes = [.png]
+        savePanel.allowedContentTypes = [.png,.jpeg]
         savePanel.canCreateDirectories = true
         savePanel.isExtensionHidden = false
         savePanel.title = "Save your image"

@@ -24,7 +24,16 @@ struct Constants {
 
 struct ColorPickerView: View {
     
-    let colors = [Color.red, Color.orange, Color.green, Color.blue, Color.purple]
+    let colors = [
+        Color.white,
+        Color.black,
+        Color.red,
+        Color.orange,
+        Color.green,
+        Color.blue,
+        Color.purple,
+    ]
+    
     @Binding var selectedColor: Color
     
     var body: some View {
