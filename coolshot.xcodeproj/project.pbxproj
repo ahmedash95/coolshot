@@ -20,6 +20,7 @@
 /* Begin PBXFileReference section */
 		E2020BAC294A50D200997CBF /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E27CA0E52950C1B500A7B7EE /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
+		E27CA0E7295135BD00A7B7EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* coolshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coolshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
 		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		E2E35C35293E645800D5F0E3 /* coolshot */ = {
 			isa = PBXGroup;
 			children = (
+				E27CA0E7295135BD00A7B7EE /* Info.plist */,
 				E27CA0E42950C1A700A7B7EE /* Shapes */,
 				E2E6180F2946036800CF1EAF /* ViewModel */,
 				E2E35C36293E645800D5F0E3 /* coolshotApp.swift */,
@@ -298,12 +300,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = coolshot/coolshot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"coolshot/Preview Content\"";
+				DEVELOPMENT_TEAM = 7CE3E2W6XY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = coolshot/Info.plist;
+				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -323,12 +329,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = coolshot/coolshot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"coolshot/Preview Content\"";
+				DEVELOPMENT_TEAM = 7CE3E2W6XY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = coolshot/Info.plist;
+				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

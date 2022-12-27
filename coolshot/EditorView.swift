@@ -40,8 +40,10 @@ struct ShapeDetails: Hashable {
 struct EditorView: View {
     var editorViewModel = EditorViewModel()
     
+    @EnvironmentObject var imageModel: ImageModel
+  
     
-    @State private var image = NSImage(named: "out")
+//    @State private var image = NSImage(named: "out")
     @State private var selectedColors = [Color.red, Color.green, Color.blue]
     
     @State private var thickness: Double = 3.0
@@ -67,7 +69,7 @@ struct EditorView: View {
                    startPoint: .topLeading,
                    endPoint: .bottomTrailing)
                 
-                Image(nsImage: image!)
+                Image(nsImage: (imageModel.image))
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(self.cornerRadius)
@@ -150,7 +152,7 @@ struct EditorView: View {
                 
                 HStack {
                     Button(action: {
-                        image = editorViewModel.takeScreenShot()
+                        imageModel.image = editorViewModel.takeScreenShot()
                     }) {
                         Text("Take")
                             .padding([.top,.bottom], 20)
