@@ -17,19 +17,32 @@ class ImageModel: ObservableObject {
     }
 }
 
+class ClosableWindow: NSWindow {
+    override func close() {
+        self.orderOut(NSApp)
+        print(NSApp.windows.count)
+        if NSApp.windows.count == 2 { // 2 because menubar is a window
+            NSApp.setActivationPolicy(.accessory)
+        }
+    }
+}
+
 @main
 struct coolshotApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
-        MenuBarExtra("1", systemImage: "1.circle") {
+        MenuBarExtra("CoolShot", systemImage: "camera.on.rectangle") {
             Button("Capture area") {
+                NSApp.activate(ignoringOtherApps: true)
+                NSApp.setActivationPolicy(.regular)
+                
                 let image = EditorViewModel().takeScreenShot()
                 let imageModel = ImageModel(image: image)
                 // create an instance of the EditorView with the image object
                 let editorView = EditorView().environmentObject(imageModel)
                 // open a new window with the editor view
-                let window = NSWindow(
+                let window = ClosableWindow(
                     contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
                     styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                     backing: .buffered, defer: false)
@@ -40,13 +53,12 @@ struct coolshotApp: App {
                 window.makeKeyAndOrderFront(nil)
             }
             Button("Test Window") {
+                NSApp.activate(ignoringOtherApps: true)
                 NSApp.setActivationPolicy(.regular)
-                if !NSApplication.shared.isRunning {
-                    NSApplication.shared.activate(ignoringOtherApps: true)
-                }
+                
                 let editorView = EditorView().environmentObject(ImageModel(image: NSImage(named: "out")!))
                 // open a new window with the editor view
-                let window = NSWindow(
+                let window = ClosableWindow(
                     contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
                     styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                     backing: .buffered, defer: false)
