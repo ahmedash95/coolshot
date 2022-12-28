@@ -8,6 +8,7 @@
 import SwiftUI
 import Security
 import UserNotifications
+import KeyboardShortcuts
 
 class ImageModel: ObservableObject {
     @Published var image: NSImage
@@ -20,7 +21,6 @@ class ImageModel: ObservableObject {
 class ClosableWindow: NSWindow {
     override func close() {
         self.orderOut(NSApp)
-        print(NSApp.windows.count)
         if NSApp.windows.count == 2 { // 2 because menubar is a window
             NSApp.setActivationPolicy(.accessory)
         }
@@ -31,48 +31,30 @@ class ClosableWindow: NSWindow {
 struct coolshotApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @StateObject private var appState = AppState()
+    
+    var shortcutName: String {
+        if let name = KeyboardShortcuts.getShortcut(for: .coolshotCapture) {
+            return " (\(name))"
+        }
+        
+        return ""
+    }
+    
     var body: some Scene {
         MenuBarExtra("CoolShot", systemImage: "camera.on.rectangle") {
-            Button("Capture area") {
-                NSApp.activate(ignoringOtherApps: true)
-                NSApp.setActivationPolicy(.regular)
-                
-                let image = EditorViewModel().takeScreenShot()
-                let imageModel = ImageModel(image: image)
-                // create an instance of the EditorView with the image object
-                let editorView = EditorView().environmentObject(imageModel)
-                // open a new window with the editor view
-                let window = ClosableWindow(
-                    contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-                    styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-                    backing: .buffered, defer: false)
-                window.center()
-                window.setFrameAutosaveName("Editor")
-                window.contentView = NSHostingView(rootView: editorView)
-                window.miniwindowImage = NSImage(named: "windowIcon")
-                window.makeKeyAndOrderFront(nil)
-            }
-            Button("Test Window") {
-                NSApp.activate(ignoringOtherApps: true)
-                NSApp.setActivationPolicy(.regular)
-                
-                let editorView = EditorView().environmentObject(ImageModel(image: NSImage(named: "out")!))
-                // open a new window with the editor view
-                let window = ClosableWindow(
-                    contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-                    styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-                    backing: .buffered, defer: false)
-                window.center()
-                window.setFrameAutosaveName("Editor")
-                window.contentView = NSHostingView(rootView: editorView)
-                window.miniwindowImage = NSImage(named: "windowIcon")
-                window.makeKeyAndOrderFront(nil)
+            Button("Capture area\(shortcutName)") {
+                MenuBarActions.captureScreenAndOpenEditor()
             }
             Divider()
+            Button("Preferences") {
+                MenuBarActions.openPreferences()
+            }
             Button("About CoolShot") {
                 NSApplication.shared.orderFrontStandardAboutPanel()
             }
             Divider()
+            
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }.keyboardShortcut("q")
@@ -80,6 +62,14 @@ struct coolshotApp: App {
     }
 }
 
+@MainActor
+final class AppState: ObservableObject {
+    init() {
+        KeyboardShortcuts.onKeyUp(for: .coolshotCapture) {
+            MenuBarActions.captureScreenAndOpenEditor()
+        }
+    }
+}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2020BAC294A50D200997CBF /* ColorPickerView.swift */; };
 		E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CA0E52950C1B500A7B7EE /* Arrow.swift */; };
+		E2850A41295BB60D00F6E95B /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E2850A40295BB60D00F6E95B /* KeyboardShortcuts */; };
+		E2850A44295BB64600F6E95B /* hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A43295BB64600F6E95B /* hotkey.swift */; };
+		E2850A47295BB68A00F6E95B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A46295BB68A00F6E95B /* Preferences.swift */; };
+		E2850A4A295BB7A300F6E95B /* MenuBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A49295BB7A300F6E95B /* MenuBarActions.swift */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -21,6 +25,9 @@
 		E2020BAC294A50D200997CBF /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E27CA0E52950C1B500A7B7EE /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		E27CA0E7295135BD00A7B7EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E2850A43295BB64600F6E95B /* hotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hotkey.swift; sourceTree = "<group>"; };
+		E2850A46295BB68A00F6E95B /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		E2850A49295BB7A300F6E95B /* MenuBarActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarActions.swift; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* coolshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coolshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
 		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2850A41295BB60D00F6E95B /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +56,30 @@
 				E27CA0E52950C1B500A7B7EE /* Arrow.swift */,
 			);
 			path = Shapes;
+			sourceTree = "<group>";
+		};
+		E2850A42295BB63000F6E95B /* keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				E2850A43295BB64600F6E95B /* hotkey.swift */,
+			);
+			path = keyboard;
+			sourceTree = "<group>";
+		};
+		E2850A45295BB67A00F6E95B /* views */ = {
+			isa = PBXGroup;
+			children = (
+				E2850A46295BB68A00F6E95B /* Preferences.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		E2850A48295BB78F00F6E95B /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				E2850A49295BB7A300F6E95B /* MenuBarActions.swift */,
+			);
+			path = actions;
 			sourceTree = "<group>";
 		};
 		E2E35C2A293E645800D5F0E3 = {
@@ -69,6 +101,9 @@
 		E2E35C35293E645800D5F0E3 /* coolshot */ = {
 			isa = PBXGroup;
 			children = (
+				E2850A48295BB78F00F6E95B /* actions */,
+				E2850A45295BB67A00F6E95B /* views */,
+				E2850A42295BB63000F6E95B /* keyboard */,
 				E27CA0E7295135BD00A7B7EE /* Info.plist */,
 				E27CA0E42950C1A700A7B7EE /* Shapes */,
 				E2E6180F2946036800CF1EAF /* ViewModel */,
@@ -115,6 +150,9 @@
 			dependencies = (
 			);
 			name = coolshot;
+			packageProductDependencies = (
+				E2850A40295BB60D00F6E95B /* KeyboardShortcuts */,
+			);
 			productName = coolshot;
 			productReference = E2E35C33293E645800D5F0E3 /* coolshot.app */;
 			productType = "com.apple.product-type.application";
@@ -143,6 +181,9 @@
 				Base,
 			);
 			mainGroup = E2E35C2A293E645800D5F0E3;
+			packageReferences = (
+				E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+			);
 			productRefGroup = E2E35C34293E645800D5F0E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -170,10 +211,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */,
+				E2850A44295BB64600F6E95B /* hotkey.swift in Sources */,
 				E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */,
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
 				E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */,
 				E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */,
+				E2850A47295BB68A00F6E95B /* Preferences.swift in Sources */,
+				E2850A4A295BB7A300F6E95B /* MenuBarActions.swift in Sources */,
 				E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +418,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E2850A40295BB60D00F6E95B /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E2E35C2B293E645800D5F0E3 /* Project object */;
 }
