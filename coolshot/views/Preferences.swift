@@ -7,17 +7,16 @@
 
 import SwiftUI
 import KeyboardShortcuts
+import LaunchAtLogin
 
 struct Preferences: View {
     
     @State private var autoclose: Bool;
-    @State private var launchAtLogin: Bool;
     
     private let storage = Storage.shared
     
     init() {
         self.autoclose = storage.value(.autoclose_on_copy, defaultValue: true) as! Bool
-        self.launchAtLogin = storage.value(.launch_at_login, defaultValue: true) as! Bool
     }
     
     var body: some View {
@@ -43,11 +42,7 @@ struct Preferences: View {
                         storage.set(.autoclose_on_copy, value)
                     })
                 
-                Toggle("Launch at login", isOn: $launchAtLogin)
-                    .pickerStyle(RadioGroupPickerStyle())
-                    .onChange(of: self.launchAtLogin, perform: { value in
-                        storage.set(.launch_at_login, value)
-                    })
+                LaunchAtLogin.Toggle()
             }
             
             Divider().padding(5)

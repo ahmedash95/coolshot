@@ -14,6 +14,7 @@
 		E2850A47295BB68A00F6E95B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A46295BB68A00F6E95B /* Preferences.swift */; };
 		E2850A4A295BB7A300F6E95B /* MenuBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A49295BB7A300F6E95B /* MenuBarActions.swift */; };
 		E2850A4D295BE54800F6E95B /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A4C295BE54800F6E95B /* Storage.swift */; };
+		E2850A50295DEF8E00F6E95B /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2850A50295DEF8E00F6E95B /* LaunchAtLogin in Frameworks */,
 				E2850A41295BB60D00F6E95B /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +165,7 @@
 			name = coolshot;
 			packageProductDependencies = (
 				E2850A40295BB60D00F6E95B /* KeyboardShortcuts */,
+				E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */,
 			);
 			productName = coolshot;
 			productReference = E2E35C33293E645800D5F0E3 /* coolshot.app */;
@@ -194,6 +197,7 @@
 			mainGroup = E2E35C2A293E645800D5F0E3;
 			packageReferences = (
 				E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = E2E35C34293E645800D5F0E3 /* Products */;
 			projectDirPath = "";
@@ -440,6 +444,14 @@
 				kind = branch;
 			};
 		};
+		E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -447,6 +459,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
+		};
+		E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
