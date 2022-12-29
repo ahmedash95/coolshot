@@ -160,8 +160,10 @@ struct EditorView: View {
                     
                     Button("Copy ⌘C") {
                         editorViewModel.copyToClipboard(view: editorView)
-                        if let _ = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
-                            NSApplication.shared.keyWindow?.close()
+                        if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
+                            if close {
+                                NSApplication.shared.keyWindow?.close()
+                            }
                         }
                     }.keyboardShortcut("C")
                     
