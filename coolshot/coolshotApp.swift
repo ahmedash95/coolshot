@@ -12,9 +12,14 @@ import KeyboardShortcuts
 
 class ImageModel: ObservableObject {
     @Published var image: NSImage
+    @Published var width: CGFloat
+    @Published var height: CGFloat
+    
 
     init(image: NSImage) {
         self.image = image
+        self.width = image.size.width
+        self.height = image.size.height
     }
 }
 

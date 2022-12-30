@@ -1,4 +1,4 @@
-//
+
 //  ContentView.swift
 //  coolshot
 //
@@ -11,6 +11,7 @@ import UserNotifications
 import Cocoa
 
 enum ShapeType: String {
+    case none = "none"
     case rectangle = "rectangle"
     case arrow = "arrow"
 }
@@ -40,40 +41,44 @@ struct ShapeDetails: Hashable {
 struct EditorView: View {
     var editorViewModel = EditorViewModel()
     
-    @EnvironmentObject var imageModel: ImageModel
+    @State var imageModel: ImageModel
   
-    
-//    @State private var image = NSImage(named: "out")
     @State private var selectedColors = [Color.red, Color.green, Color.blue]
     
     @State private var thickness: Double = 3.0
-    @State private var padding: Double = 20.0
+    @State private var padding: Double = 50.0
     @State private var cornerRadius: Double = 20.0
-
 
     @State private var selectedColor: Color = .white
     @State private var shapeFill = false
     @State private var isDragging: Bool = false
-    @State private var shapeType: ShapeType = .arrow
+    @State private var shapeType: ShapeType = .none
 
     
     @State private var shapes: [ShapeDetails] = []
     @State private var currentShape: ShapeDetails = ShapeDetails()
     
+    @State public var editorScale: CGFloat
+    
+    init(image: ImageModel) {
+        self.imageModel = image
+        self.editorScale = max(image.width, image.height) > 700 ? 0.7 : 1
+    }
+    
     var editorView: some View {
         ZStack(alignment: .topLeading) {
-            
             ZStack {
                 LinearGradient(
                     gradient: Gradient(colors: self.selectedColors),
                    startPoint: .topLeading,
                    endPoint: .bottomTrailing)
+                .frame(width: imageModel.width + self.padding, height: imageModel.height + self.padding)
                 
                 Image(nsImage: (imageModel.image))
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(self.cornerRadius)
-                    .padding(self.padding)
+                    .frame(width: imageModel.width, height: imageModel.height)
             }
             
             
@@ -127,7 +132,9 @@ struct EditorView: View {
                         self.currentShape.width = width
                         self.currentShape.height = height
                     }
-                    shapes[shapes.count-1] = self.currentShape
+                    if(shapes.count > 0) {
+                        shapes[shapes.count-1] = self.currentShape
+                    }
                 }
               })
             .onEnded({ value in
@@ -140,47 +147,22 @@ struct EditorView: View {
                 self.currentShape = ShapeDetails()
             })
         )
-        .frame(width: 800, height: 500, alignment: .center)
-        .clipped()
     }
     
     var body: some View {
         HStack {
             VStack {
-                editorView
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
-                HStack {
-                    Button(action: {
-                        imageModel.image = editorViewModel.takeScreenShot()
-                    }) {
-                        Text("Take")
-                            .padding([.top,.bottom], 20)
-                    }
-                    
-                    Button("Copy ⌘C") {
-                        editorViewModel.copyToClipboard(view: editorView)
-                        if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
-                            if close {
-                                NSApplication.shared.keyWindow?.close()
-                            }
-                        }
-                    }.keyboardShortcut("C")
-                    
-                    Button("Save ⌘S") {
-                        editorViewModel.saveToFile(view: editorView)
-                    }.keyboardShortcut("S")
-                    
-                    Button("Undo ⌘Z") {
-                        if shapes.count == 0 {
-                            return
-                        }
-                        
-                        _ = shapes.popLast()
-                    }.keyboardShortcut("Z")
+                ScrollView([.horizontal, .vertical], showsIndicators: true) {
+                    editorView
+                        .scaleEffect(editorScale)
                 }
-                .padding([.top, .bottom], 10)
-                .frame(height: 50)
+                .clipped()
+                .gesture(MagnificationGesture()
+                       .onChanged { value in
+                           self.editorScale = value.magnitude
+                    }
+                )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -193,6 +175,17 @@ struct EditorView: View {
                             Text("Shape")
                             
                             HStack {
+                                
+                                Image(systemName: "cursorarrow")
+                                    .frame(width: 50, height: 25)
+                                    .foregroundColor(Color.white)
+                                    .background(shapeType == ShapeType.none ? Color.black : Color.gray)
+                                    .padding(3)
+                                    .border(.gray, width: 2)
+                                    .gesture(TapGesture().onEnded{
+                                        shapeType = ShapeType.none
+                                    })
+                                
                                 Image(systemName: "arrow.up.right")
                                     .frame(width: 50, height: 25)
                                     .foregroundColor(Color.white)
@@ -242,7 +235,7 @@ struct EditorView: View {
                             
                             Group {
                                 Text("Padding")
-                                Slider(value: $padding, in: 1...100).frame(maxWidth: 200)
+                                Slider(value: $padding, in: 1...500).frame(maxWidth: 200)
                                     .onChange(of: padding) { val in
                                         self.padding = val
                                     }
@@ -277,6 +270,28 @@ struct EditorView: View {
                         }
                         
                         Spacer()
+                        HStack(alignment: .bottom) {
+                            Button("Copy ⌘C") {
+                                editorViewModel.copyToClipboard(view: editorView)
+                                if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
+                                    if close {
+                                        NSApplication.shared.keyWindow?.close()
+                                    }
+                                }
+                            }.keyboardShortcut("C")
+                            
+                            Button("Save ⌘S") {
+                                editorViewModel.saveToFile(view: editorView)
+                            }.keyboardShortcut("S")
+                            
+                            Button("Undo ⌘Z") {
+                                if shapes.count == 0 {
+                                    return
+                                }
+                                
+                                _ = shapes.popLast()
+                            }.keyboardShortcut("Z")
+                        }.padding([.top,.bottom], 10)
                     }
                 }
                 .frame(width: 250)
@@ -287,6 +302,6 @@ struct EditorView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EditorView()
+        EditorView(image: ImageModel(image: NSImage(data: Data())!))
     }
 }

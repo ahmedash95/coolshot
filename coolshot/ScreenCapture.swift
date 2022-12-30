@@ -13,22 +13,23 @@ import UniformTypeIdentifiers
 import AppKit
 
 class ScreenCapture {
-    func screenshotWindowAndSuccess() -> Bool {
+    func captureSelection() -> NSImage? {
+        let uuid = UUID().uuidString
+        let filePath = NSTemporaryDirectory() + "screenshot-\(uuid).png"
+        
         let task = Process()
         task.launchPath = "/usr/sbin/screencapture"
-        task.arguments = ["-ci"]
+        task.arguments = ["-i", "-r", filePath]
         task.launch()
         task.waitUntilExit()
         let status = task.terminationStatus
-        return status == 0
-    }
 
-    func getImageFromPasteboard() -> NSImage {
-        let pasteboard = NSPasteboard.general
-        guard pasteboard.canReadItem(withDataConformingToTypes:
-            NSImage.imageTypes) else { return NSImage() }
-        guard let image = NSImage(pasteboard: pasteboard) else { return
-            NSImage() }
-        return image
+        if status == 0 {
+            let image = NSImage(contentsOfFile: filePath)
+            try? FileManager.default.removeItem(atPath: filePath)
+            return image
+        } else {
+            return nil
+        }
     }
 }

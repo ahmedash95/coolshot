@@ -31,14 +31,6 @@ class EditorViewModel {
         [.clear],
     ]
     
-    func takeScreenShot() -> NSImage {
-        if screenCapture.screenshotWindowAndSuccess() {
-            return screenCapture.getImageFromPasteboard()
-        }
-        
-        return NSImage(data: Data())!
-    }
-    
     @MainActor func copyToClipboard(view: some View) {
         guard let output = self.getImageFromView(view: view) else {
             return
