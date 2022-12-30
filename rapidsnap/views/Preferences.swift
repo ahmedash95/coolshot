@@ -23,7 +23,7 @@ struct Preferences: View {
         VStack {
             Image(nsImage: NSImage(named: "AppIcon")!)
                 .padding(.bottom, 20)
-            Text("CoolShot App")
+            Text(Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "")
                 .padding(.bottom, 20)
             
             Divider().padding(5)
@@ -48,7 +48,9 @@ struct Preferences: View {
             Divider().padding(5)
             
             Button("Submit issue or feedback") {
-            
+                if let url = URL(string: "https://github.com/ahmedash95/rapidsnap-support/issues") {
+                    NSWorkspace.shared.open(url)
+                }
             }
         }.padding([.bottom,.top], 50)
     }
