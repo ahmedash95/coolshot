@@ -89,7 +89,6 @@ final class AppState: ObservableObject {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { (status, _) in }
         NSApp.setActivationPolicy(.accessory)
         
         let hasScreenAccess = CGPreflightScreenCaptureAccess();
