@@ -15,7 +15,7 @@ struct EditorView: View {
     
     @State var imageModel: ImageModel
   
-    @State private var selectedColors: [Color]
+    @State private var selectedColorsIndex: Int
     
     @State private var thickness: Double
     @State private var padding: Double
@@ -36,7 +36,10 @@ struct EditorView: View {
     init(image: ImageModel) {
         self.imageModel = image
         self.editorScale = max(image.width, image.height) > 700 ? 0.7 : 1
-        self.selectedColors = Storage.shared.value(.backgroundColors, defaultValue: editorViewModel.gradientObjects.first!) as! [Color]
+        let storedBackgroundIndex = Storage.shared.value(.backgroundColors, defaultValue: 0) as! Int
+        
+        // reset background colors index on missing
+        self.selectedColorsIndex = storedBackgroundIndex < editorViewModel.gradientObjects.count ? storedBackgroundIndex : 0
         
         
         self.thickness = Storage.shared.value(.shapeThickness, defaultValue: 3.0) as! Double
@@ -56,7 +59,7 @@ struct EditorView: View {
             ZStack {
                 if background {
                     LinearGradient(
-                        gradient: Gradient(colors: self.selectedColors),
+                        gradient: Gradient(colors: editorViewModel.gradientObjects[self.selectedColorsIndex]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing)
                     .frame(width: imageModel.width + self.padding, height: imageModel.height + self.padding)
@@ -232,17 +235,17 @@ struct EditorView: View {
                     
                     HStack {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 10) {
-                            ForEach(editorViewModel.gradientObjects, id: \.self) { go in
+                            ForEach(Array(editorViewModel.gradientObjects.enumerated()), id: \.offset) { (index, go) in
                                 LinearGradient(
                                     gradient: Gradient(colors: go),
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing)
                                 .frame(width: 40, height: 40)
-                                .border(.black, width: 0.5)
+                                .border(.white, width: self.selectedColorsIndex == index ? 3 : 0)
                                 .cornerRadius(5)
                                 .gesture(TapGesture().onEnded{
-                                    selectedColors = go
-                                    Storage.shared.set(.backgroundColors, go)
+                                    self.selectedColorsIndex = index
+                                    Storage.shared.set(.backgroundColors, index)
                                 })
                             }
                         }
