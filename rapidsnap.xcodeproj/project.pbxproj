@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2020BAC294A50D200997CBF /* ColorPickerView.swift */; };
 		E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CA0E52950C1B500A7B7EE /* Arrow.swift */; };
-		E2850A41295BB60D00F6E95B /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E2850A40295BB60D00F6E95B /* KeyboardShortcuts */; };
 		E2850A44295BB64600F6E95B /* hotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A43295BB64600F6E95B /* hotkey.swift */; };
 		E2850A47295BB68A00F6E95B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A46295BB68A00F6E95B /* Preferences.swift */; };
 		E2850A4A295BB7A300F6E95B /* MenuBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A49295BB7A300F6E95B /* MenuBarActions.swift */; };
 		E2850A4D295BE54800F6E95B /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2850A4C295BE54800F6E95B /* Storage.swift */; };
-		E2850A50295DEF8E00F6E95B /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */; };
 		E2A8AC602961E1CF00B96EE2 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8AC5F2961E1CF00B96EE2 /* Base.swift */; };
 		E2A8AC652961EAA700B96EE2 /* RightMenuContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A8AC642961EAA700B96EE2 /* RightMenuContainer.swift */; };
+		E2B4AF6A2961F6C000C71774 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E2B4AF692961F6C000C71774 /* LaunchAtLogin */; };
+		E2B4AF6D2961F70B00C71774 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E2B4AF6C2961F70B00C71774 /* KeyboardShortcuts */; };
+		E2B4AF6F296201EC00C71774 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4AF6E296201EC00C71774 /* Colors.swift */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		E2850A4C295BE54800F6E95B /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		E2A8AC5F2961E1CF00B96EE2 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		E2A8AC642961EAA700B96EE2 /* RightMenuContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMenuContainer.swift; sourceTree = "<group>"; };
+		E2B4AF6E296201EC00C71774 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* RapidSnap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RapidSnap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
 		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -50,8 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2850A50295DEF8E00F6E95B /* LaunchAtLogin in Frameworks */,
-				E2850A41295BB60D00F6E95B /* KeyboardShortcuts in Frameworks */,
+				E2B4AF6A2961F6C000C71774 /* LaunchAtLogin in Frameworks */,
+				E2B4AF6D2961F70B00C71774 /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				E2850A4C295BE54800F6E95B /* Storage.swift */,
+				E2B4AF6E296201EC00C71774 /* Colors.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -178,8 +181,8 @@
 			);
 			name = RapidSnap;
 			packageProductDependencies = (
-				E2850A40295BB60D00F6E95B /* KeyboardShortcuts */,
-				E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */,
+				E2B4AF692961F6C000C71774 /* LaunchAtLogin */,
+				E2B4AF6C2961F70B00C71774 /* KeyboardShortcuts */,
 			);
 			productName = coolshot;
 			productReference = E2E35C33293E645800D5F0E3 /* RapidSnap.app */;
@@ -210,8 +213,8 @@
 			);
 			mainGroup = E2E35C2A293E645800D5F0E3;
 			packageReferences = (
-				E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
-				E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+				E2B4AF682961F6C000C71774 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+				E2B4AF6B2961F70B00C71774 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = E2E35C34293E645800D5F0E3 /* Products */;
 			projectDirPath = "";
@@ -247,6 +250,7 @@
 				E2A8AC652961EAA700B96EE2 /* RightMenuContainer.swift in Sources */,
 				E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */,
 				E2850A47295BB68A00F6E95B /* Preferences.swift in Sources */,
+				E2B4AF6F296201EC00C71774 /* Colors.swift in Sources */,
 				E2850A4A295BB7A300F6E95B /* MenuBarActions.swift in Sources */,
 				E27CA0E62950C1B500A7B7EE /* Arrow.swift in Sources */,
 				E2850A4D295BE54800F6E95B /* Storage.swift in Sources */,
@@ -386,6 +390,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rapidsnap/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -416,6 +421,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rapidsnap/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -454,17 +460,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+		E2B4AF682961F6C000C71774 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
 				branch = main;
 				kind = branch;
 			};
 		};
-		E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+		E2B4AF6B2961F70B00C71774 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -473,15 +479,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E2850A40295BB60D00F6E95B /* KeyboardShortcuts */ = {
+		E2B4AF692961F6C000C71774 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2850A3F295BB60D00F6E95B /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
-			productName = KeyboardShortcuts;
-		};
-		E2850A4F295DEF8E00F6E95B /* LaunchAtLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2850A4E295DEF8D00F6E95B /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			package = E2B4AF682961F6C000C71774 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
+		};
+		E2B4AF6C2961F70B00C71774 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2B4AF6B2961F70B00C71774 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

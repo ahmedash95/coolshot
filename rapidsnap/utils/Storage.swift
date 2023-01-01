@@ -9,7 +9,13 @@ import Foundation
 
 enum ConfigKeys: String {
     case autoclose_on_copy
-    case launch_at_login
+    case shapeThickness
+    case padding
+    case radius
+    case shapeColor
+    case background
+    case shapeFill
+    case backgroundColors
 }
 
 class Storage {

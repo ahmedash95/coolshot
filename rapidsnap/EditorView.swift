@@ -15,17 +15,18 @@ struct EditorView: View {
     
     @State var imageModel: ImageModel
   
-    @State private var selectedColors = [Color.red, Color.green, Color.blue]
+    @State private var selectedColors: [Color]
     
-    @State private var thickness: Double = 3.0
-    @State private var padding: Double = 50.0
-    @State private var cornerRadius: Double = 20.0
+    @State private var thickness: Double
+    @State private var padding: Double
+    @State private var cornerRadius: Double
 
-    @State private var selectedColor: Color = .white
-    @State private var shapeFill = false
-    @State private var isDragging: Bool = false
+    @State private var selectedColor: Color
+    @State private var background: Bool
+    @State private var shapeFill: Bool
     @State private var shapeType: ShapeType = .none
 
+    @State private var isDragging: Bool = false
     
     @State private var shapes: [ShapeDetails] = []
     @State private var currentShape: ShapeDetails = ShapeDetails()
@@ -35,16 +36,31 @@ struct EditorView: View {
     init(image: ImageModel) {
         self.imageModel = image
         self.editorScale = max(image.width, image.height) > 700 ? 0.7 : 1
+        self.selectedColors = Storage.shared.value(.backgroundColors, defaultValue: editorViewModel.gradientObjects.first!) as! [Color]
+        
+        
+        self.thickness = Storage.shared.value(.shapeThickness, defaultValue: 3.0) as! Double
+        self.padding = Storage.shared.value(.padding, defaultValue: 50.0) as! Double
+        self.cornerRadius = Storage.shared.value(.radius, defaultValue: 20.0) as! Double
+        
+        self.selectedColor = Storage.shared.value(.shapeColor, defaultValue: Color.white) as! Color
+        
+        self.background = Storage.shared.value(.background, defaultValue: true) as! Bool
+        self.shapeFill = Storage.shared.value(.shapeFill, defaultValue: true) as! Bool
+        
+        
     }
     
     var editorView: some View {
         ZStack(alignment: .topLeading) {
             ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: self.selectedColors),
-                   startPoint: .topLeading,
-                   endPoint: .bottomTrailing)
-                .frame(width: imageModel.width + self.padding, height: imageModel.height + self.padding)
+                if background {
+                    LinearGradient(
+                        gradient: Gradient(colors: self.selectedColors),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing)
+                    .frame(width: imageModel.width + self.padding, height: imageModel.height + self.padding)
+                }
                 
                 Image(nsImage: (imageModel.image))
                     .resizable()
@@ -123,7 +139,6 @@ struct EditorView: View {
     var body: some View {
         HStack {
             VStack {
-                
                 ScrollView([.horizontal, .vertical], showsIndicators: true) {
                     editorView
                         .scaleEffect(editorScale)
@@ -137,123 +152,134 @@ struct EditorView: View {
                 )
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            Divider()
-                VStack {
-                    VStack(alignment: .leading) {
-                        RightMenuContainer{
-                            Text("Shape")
-                            
-                            HStack {
-                                ForEach(EnabledShapes, id: \.self) { shape in
-                                    Image(systemName: shape.systemImageName)
-                                        .frame(width: 24, height: 24)
-                                        .foregroundColor(Color.white)
-                                        .background(shape.type == shapeType ? Color("Buttons") : Color.gray)
-                                        .cornerRadius(8)
-                                        .opacity(shape.type == shapeType ? 1 : 0.5)
-                                        .gesture(TapGesture().onEnded{
-                                            shapeType = shape.type
-                                        })
-                                }
-                            }
-                            
-                            Divider().padding([.top, .bottom], 5)
-                            
-                            HStack {
-                                Text("Thickness")
-                                Spacer()
-                                Toggle("Fill", isOn: self.$shapeFill)
-                                    .pickerStyle(RadioGroupPickerStyle())
-                            }
-                            Slider(value: $thickness, in: 1...20).frame(maxWidth: 200)
-                                .onChange(of: thickness) { newThickness in
-                                    self.thickness = newThickness
-                                }
-                            
-                            ColorPickerView(selectedColor: self.$selectedColor)
-                                .padding(.vertical, 10)
-                                .onChange(of: self.selectedColor) { newColor in
-                                    self.selectedColor = newColor
-                                }
-                        }
-                        
-                        RightMenuContainer{
-                            HStack(alignment: .firstTextBaseline) {
-                                Text("Padding")
-                                    .frame(width: 60)
-                                
-                                Slider(value: $padding, in: 1...500).frame(maxWidth: 200)
-                                    .onChange(of: padding) { val in
-                                        self.padding = val
-                                    }
-                            }
-                            
-                            HStack(alignment: .firstTextBaseline) {
-                                Text("Radius")
-                                    .frame(width: 60)
-                                
-                                Slider(value: $cornerRadius, in: 1...100).frame(maxWidth: 200)
-                                    .onChange(of: cornerRadius) { val in
-                                        self.cornerRadius = val
-                                    }
-                            }
-                        }
-                    }
-                    
-                    RightMenuContainer {
-                        Text("Background")
-                            .bold()
+
+            VStack {
+                VStack(alignment: .leading) {
+                    RightMenuContainer{
+                        Text("Shape")
                         
                         HStack {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 10) {
-                                ForEach(editorViewModel.gradientObjects, id: \.self) { go in
-                                    LinearGradient(
-                                        gradient: Gradient(colors: go),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing)
-                                    .frame(width: 40, height: 40)
-                                    .border(.black, width: 0.5)
-                                    .cornerRadius(5)
+                            ForEach(EnabledShapes, id: \.self) { shape in
+                                Image(systemName: shape.systemImageName)
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(Color.white)
+                                    .background(shape.type == shapeType ? Color("Buttons") : Color.gray)
+                                    .cornerRadius(8)
+                                    .opacity(shape.type == shapeType ? 1 : 0.5)
                                     .gesture(TapGesture().onEnded{
-                                        selectedColors = go
+                                        shapeType = shape.type
                                     })
-                                }
                             }
-                            .padding([.trailing, .bottom], 10)
+                        }
+                        
+                        Divider().padding([.top, .bottom], 5)
+                        
+                        HStack {
+                            Text("Thickness")
+                            Spacer()
+                            Toggle("Fill", isOn: self.$shapeFill)
+                                .pickerStyle(RadioGroupPickerStyle())
+                                .onChange(of: self.shapeFill) { val in
+                                    Storage.shared.set(.shapeFill, val)
+                                }
+                        }
+                        Slider(value: $thickness, in: 1...20).frame(maxWidth: 200)
+                            .onChange(of: thickness) { newThickness in
+                                self.thickness = newThickness
+                                Storage.shared.set(.shapeThickness, newThickness)
+                            }
+                        
+                        ColorPickerView(selectedColor: self.$selectedColor)
+                            .padding(.vertical, 10)
+                            .onChange(of: self.selectedColor) { newColor in
+                                self.selectedColor = newColor
+                                Storage.shared.set(.shapeColor, newColor)
+                            }
+                    }
+                    
+                    RightMenuContainer{
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("Padding")
+                                .frame(width: 60)
+                            
+                            Slider(value: $padding, in: 1...500).frame(maxWidth: 200)
+                                .onChange(of: padding) { val in
+                                    self.padding = val
+                                    Storage.shared.set(.padding, val)
+                                }
+                        }
+                        
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("Radius")
+                                .frame(width: 60)
+                            
+                            Slider(value: $cornerRadius, in: 1...100).frame(maxWidth: 200)
+                                .onChange(of: cornerRadius) { val in
+                                    self.cornerRadius = val
+                                    Storage.shared.set(.radius, val)
+                                }
                         }
                     }
-
-                    HStack(alignment: .bottom) {
-                        Button("Copy ⌘C") {
-                            editorViewModel.copyToClipboard(view: editorView)
-                            if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
-                                if close {
-                                    NSApplication.shared.keyWindow?.close()
-                                }
+                }
+                
+                RightMenuContainer {
+                    Toggle("Background", isOn: self.$background)
+                        .pickerStyle(RadioGroupPickerStyle())
+                        .bold()
+                        .onChange(of: self.background) { val in
+                            Storage.shared.set(.background, val)
+                        }
+                    
+                    HStack {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 10) {
+                            ForEach(editorViewModel.gradientObjects, id: \.self) { go in
+                                LinearGradient(
+                                    gradient: Gradient(colors: go),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing)
+                                .frame(width: 40, height: 40)
+                                .border(.black, width: 0.5)
+                                .cornerRadius(5)
+                                .gesture(TapGesture().onEnded{
+                                    selectedColors = go
+                                    Storage.shared.set(.backgroundColors, go)
+                                })
                             }
                         }
-                        .keyboardShortcut("C")
-                        .foregroundColor(.white)
-                        .background(Color("Buttons"))
-                        
-                        Button("Save ⌘S") {
-                            editorViewModel.saveToFile(view: editorView)
-                        }.keyboardShortcut("S")
-                        
-                        Button("Undo ⌘Z") {
-                            if shapes.count == 0 {
-                                return
-                            }
-                            
-                            _ = shapes.popLast()
-                        }.keyboardShortcut("Z")
-                    }.padding([.top,.bottom], 10)
-                    
-                    Spacer() // to stick items to the top always
+                        .padding([.trailing, .bottom], 10)
+                    }
                 }
-                .frame(width: 250)
-                .clipped()
+
+                HStack(alignment: .bottom) {
+                    Button("Copy ⌘C") {
+                        editorViewModel.copyToClipboard(view: editorView)
+                        if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
+                            if close {
+                                NSApplication.shared.keyWindow?.close()
+                            }
+                        }
+                    }
+                    .keyboardShortcut("C")
+                    .foregroundColor(.white)
+                    .background(Color("Buttons"))
+                    
+                    Button("Save ⌘S") {
+                        editorViewModel.saveToFile(view: editorView)
+                    }.keyboardShortcut("S")
+                    
+                    Button("Undo ⌘Z") {
+                        if shapes.count == 0 {
+                            return
+                        }
+                        
+                        _ = shapes.popLast()
+                    }.keyboardShortcut("Z")
+                }.padding([.top,.bottom], 10)
+                
+                Spacer() // to stick items to the top always
+            }
+            .frame(width: 250)
+            .clipped()
         }
     }
 }

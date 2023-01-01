@@ -25,6 +25,9 @@ struct MenuBarActions {
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered, defer: false)
         window.center()
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
         window.setFrameAutosaveName("Editor")
         window.contentView = NSHostingView(rootView: view)
         window.miniwindowImage = NSImage(named: "windowIcon")

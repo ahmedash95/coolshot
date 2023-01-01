@@ -14,21 +14,22 @@ class EditorViewModel {
     var screenCapture = ScreenCapture()
     
     let gradientObjects: [[Color]] = [
-        [.red, .green, .blue],
+        [.orange, .red, .pink],
+        [.purple, .indigo, .darkBlue],
+        [.lightPink, .pink, .lightPurple],
+        [.red, .orange, .yellow],
+        [.lightBlue, .blue, .darkBlue],
+        [.lightYellow, .yellow, .orange],
         [.orange, .purple, .yellow],
         [.red, .orange],
         [.yellow, .green],
         [.blue, .purple],
         [.pink, .white],
-        [.black, .gray],
-        [.red, .yellow],
         [.green, .blue],
         [.purple, .pink],
-        [.white, .black],
         [.gray, .red],
-        [.white, .white],
-        [.black, .black],
-        [.clear],
+        [.white],
+        [.black],
     ]
     
     @MainActor func copyToClipboard(view: some View) {
