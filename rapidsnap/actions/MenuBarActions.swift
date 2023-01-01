@@ -9,6 +9,19 @@ import Foundation
 import SwiftUI
 
 struct MenuBarActions {
+    static func requestScreenAccess() {
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.setActivationPolicy(.regular)
+        
+        let window = ClosableWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 500, height: 200),
+            styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
+            backing: .buffered, defer: false)
+        window.center()
+        window.contentView = NSHostingView(rootView: WelcomeScreen())
+        window.makeKeyAndOrderFront(nil)
+    }
+    
     static func captureScreenAndOpenEditor() {
         NSApp.activate(ignoringOtherApps: true)
         NSApp.setActivationPolicy(.regular)
@@ -46,9 +59,7 @@ struct MenuBarActions {
             styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
             backing: .buffered, defer: false)
         window.center()
-        window.setFrameAutosaveName("Editor")
         window.contentView = NSHostingView(rootView: Preferences())
-        window.miniwindowImage = NSImage(named: "windowIcon")
         window.makeKeyAndOrderFront(nil)
     }
 }

@@ -50,7 +50,14 @@ struct coolshotApp: App {
         MenuBarExtra("CoolShot", systemImage: "camera.on.rectangle") {
             Button("Capture area\(shortcutName)") {
                 MenuBarActions.captureScreenAndOpenEditor()
+            }.disabled(!CGPreflightScreenCaptureAccess())
+            
+            if !CGPreflightScreenCaptureAccess() {
+                Button("Grant recording permissions to capture") {
+                    CGRequestScreenCaptureAccess()
+                }
             }
+
             Divider()
             Button("Preferences") {
                 MenuBarActions.openPreferences()
@@ -84,5 +91,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { (status, _) in }
         NSApp.setActivationPolicy(.accessory)
+        
+        let hasScreenAccess = CGPreflightScreenCaptureAccess();
+        if (!hasScreenAccess) {
+            MenuBarActions.requestScreenAccess()
+        }
     }
 }

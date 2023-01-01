@@ -21,7 +21,7 @@ struct EditorView: View {
     @State private var padding: Double
     @State private var cornerRadius: Double
 
-    @State private var selectedColor: Color
+    @State private var selectedShapeColor: Color = .white
     @State private var background: Bool
     @State private var shapeFill: Bool
     @State private var shapeType: ShapeType = .none
@@ -45,8 +45,6 @@ struct EditorView: View {
         self.thickness = Storage.shared.value(.shapeThickness, defaultValue: 3.0) as! Double
         self.padding = Storage.shared.value(.padding, defaultValue: 50.0) as! Double
         self.cornerRadius = Storage.shared.value(.radius, defaultValue: 20.0) as! Double
-        
-        self.selectedColor = Storage.shared.value(.shapeColor, defaultValue: Color.white) as! Color
         
         self.background = Storage.shared.value(.background, defaultValue: true) as! Bool
         self.shapeFill = Storage.shared.value(.shapeFill, defaultValue: true) as! Bool
@@ -103,7 +101,7 @@ struct EditorView: View {
                         height: 1,
                         start: startPoint,
                         end: startPoint,
-                        color: self.selectedColor,
+                        color: self.selectedShapeColor,
                         thinkness: self.thickness,
                         fill: self.shapeFill
                     )
@@ -192,11 +190,10 @@ struct EditorView: View {
                                 Storage.shared.set(.shapeThickness, newThickness)
                             }
                         
-                        ColorPickerView(selectedColor: self.$selectedColor)
+                        ColorPickerView(selectedColor: self.$selectedShapeColor)
                             .padding(.vertical, 10)
-                            .onChange(of: self.selectedColor) { newColor in
-                                self.selectedColor = newColor
-                                Storage.shared.set(.shapeColor, newColor)
+                            .onChange(of: self.selectedShapeColor) { newColor in
+                                self.selectedShapeColor = newColor
                             }
                     }
                     
@@ -256,7 +253,7 @@ struct EditorView: View {
                 HStack(alignment: .bottom) {
                     Button("Copy ⌘C") {
                         editorViewModel.copyToClipboard(view: editorView)
-                        if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: false) as? Bool {
+                        if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: true) as? Bool {
                             if close {
                                 NSApplication.shared.keyWindow?.close()
                             }

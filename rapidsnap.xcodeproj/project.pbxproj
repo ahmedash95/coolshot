@@ -18,6 +18,7 @@
 		E2B4AF6A2961F6C000C71774 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = E2B4AF692961F6C000C71774 /* LaunchAtLogin */; };
 		E2B4AF6D2961F70B00C71774 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E2B4AF6C2961F70B00C71774 /* KeyboardShortcuts */; };
 		E2B4AF6F296201EC00C71774 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4AF6E296201EC00C71774 /* Colors.swift */; };
+		E2B4AF74296219AE00C71774 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		E2A8AC5F2961E1CF00B96EE2 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		E2A8AC642961EAA700B96EE2 /* RightMenuContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMenuContainer.swift; sourceTree = "<group>"; };
 		E2B4AF6E296201EC00C71774 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* RapidSnap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RapidSnap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
 		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				E2850A46295BB68A00F6E95B /* Preferences.swift */,
+				E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				E2850A44295BB64600F6E95B /* hotkey.swift in Sources */,
 				E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */,
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
+				E2B4AF74296219AE00C71774 /* WelcomeScreen.swift in Sources */,
 				E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */,
 				E2A8AC652961EAA700B96EE2 /* RightMenuContainer.swift in Sources */,
 				E2020BAD294A50D200997CBF /* ColorPickerView.swift in Sources */,
@@ -381,7 +385,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = rapidsnap/rapidsnap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -412,7 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = rapidsnap/rapidsnap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
