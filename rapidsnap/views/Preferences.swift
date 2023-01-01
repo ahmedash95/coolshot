@@ -29,7 +29,7 @@ struct Preferences: View {
             Divider().padding(5)
             
             Form {
-                KeyboardShortcuts.Recorder("Capture screen:", name: .coolshotCapture)
+                KeyboardShortcuts.Recorder("Capture screen:", name: .rapidSnapCapture)
             }.padding(20)
             
             Divider().padding(5)

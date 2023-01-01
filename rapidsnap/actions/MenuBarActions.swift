@@ -30,6 +30,8 @@ struct MenuBarActions {
         window.miniwindowImage = NSImage(named: "windowIcon")
         window.makeKeyAndOrderFront(nil)
         window.styleMask.insert(.resizable)
+        window.appearance = NSAppearance(named: .vibrantDark)
+        window.backgroundColor = NSColor.black //.withAlphaComponent(0.5)
     }
     
     static func openPreferences() {

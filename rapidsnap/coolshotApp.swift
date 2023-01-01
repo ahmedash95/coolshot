@@ -39,7 +39,7 @@ struct coolshotApp: App {
     @StateObject private var appState = AppState()
     
     var shortcutName: String {
-        if let name = KeyboardShortcuts.getShortcut(for: .coolshotCapture) {
+        if let name = KeyboardShortcuts.getShortcut(for: .rapidSnapCapture) {
             return " (\(name))"
         }
         
@@ -55,9 +55,13 @@ struct coolshotApp: App {
             Button("Preferences") {
                 MenuBarActions.openPreferences()
             }
-            Button("About CoolShot") {
-                NSApplication.shared.orderFrontStandardAboutPanel()
+
+            if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String {
+                Button("About \(appName)") {
+                    NSApplication.shared.orderFrontStandardAboutPanel()
+                }
             }
+
             Divider()
             
             Button("Quit") {
@@ -70,7 +74,7 @@ struct coolshotApp: App {
 @MainActor
 final class AppState: ObservableObject {
     init() {
-        KeyboardShortcuts.onKeyUp(for: .coolshotCapture) {
+        KeyboardShortcuts.onKeyUp(for: .rapidSnapCapture) {
             MenuBarActions.captureScreenAndOpenEditor()
         }
     }

@@ -9,5 +9,5 @@ import Foundation
 import KeyboardShortcuts
 
 extension KeyboardShortcuts.Name {
-    static let coolshotCapture = Self("CoolShotCapture")
+    static let rapidSnapCapture = Self("RapidSnapCapture")
 }

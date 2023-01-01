@@ -32,6 +32,7 @@ struct ColorPickerView: View {
         Color.green,
         Color.blue,
         Color.purple,
+        Color.mint
     ]
     
     @Binding var selectedColor: Color
