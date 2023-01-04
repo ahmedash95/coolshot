@@ -90,7 +90,6 @@ final class AppState: ObservableObject {
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        
         let hasScreenAccess = CGPreflightScreenCaptureAccess();
         if (!hasScreenAccess) {
             MenuBarActions.requestScreenAccess()

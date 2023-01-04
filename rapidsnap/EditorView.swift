@@ -158,6 +158,7 @@ struct EditorView: View {
                 VStack(alignment: .leading) {
                     RightMenuContainer{
                         Text("Shape")
+                            .foregroundColor(.white)
                         
                         HStack {
                             ForEach(EnabledShapes, id: \.self) { shape in
@@ -177,8 +178,10 @@ struct EditorView: View {
                         
                         HStack {
                             Text("Thickness")
+                                .foregroundColor(.white)
                             Spacer()
                             Toggle("Fill", isOn: self.$shapeFill)
+                                .foregroundColor(.white)
                                 .pickerStyle(RadioGroupPickerStyle())
                                 .onChange(of: self.shapeFill) { val in
                                     Storage.shared.set(.shapeFill, val)
@@ -200,6 +203,7 @@ struct EditorView: View {
                     RightMenuContainer{
                         HStack(alignment: .firstTextBaseline) {
                             Text("Padding")
+                                .foregroundColor(.white)
                                 .frame(width: 60)
                             
                             Slider(value: $padding, in: 1...500).frame(maxWidth: 200)
@@ -211,6 +215,7 @@ struct EditorView: View {
                         
                         HStack(alignment: .firstTextBaseline) {
                             Text("Radius")
+                                .foregroundColor(.white)
                                 .frame(width: 60)
                             
                             Slider(value: $cornerRadius, in: 1...100).frame(maxWidth: 200)
@@ -224,6 +229,7 @@ struct EditorView: View {
                 
                 RightMenuContainer {
                     Toggle("Background", isOn: self.$background)
+                        .foregroundColor(.white)
                         .pickerStyle(RadioGroupPickerStyle())
                         .bold()
                         .onChange(of: self.background) { val in
