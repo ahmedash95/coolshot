@@ -57,6 +57,14 @@ struct coolshotApp: App {
                     CGRequestScreenCaptureAccess()
                 }
             }
+            
+            Button("Open from file") {
+                MenuBarActions.SelectFileAndOpenEditor()
+            }
+            
+            Button("Open from clipboard") {
+                MenuBarActions.copyFromClipboardAndOpenEditor()
+            }
 
             Divider()
             Button("Preferences") {
