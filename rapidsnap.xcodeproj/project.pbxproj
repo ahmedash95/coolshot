@@ -19,6 +19,7 @@
 		E2B4AF6D2961F70B00C71774 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E2B4AF6C2961F70B00C71774 /* KeyboardShortcuts */; };
 		E2B4AF6F296201EC00C71774 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4AF6E296201EC00C71774 /* Colors.swift */; };
 		E2B4AF74296219AE00C71774 /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */; };
+		E2BDB4B3296E305300CBDB48 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDB4B2296E305300CBDB48 /* Image.swift */; };
 		E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C36293E645800D5F0E3 /* coolshotApp.swift */; };
 		E2E35C39293E645800D5F0E3 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E35C38293E645800D5F0E3 /* EditorView.swift */; };
 		E2E35C3B293E645900D5F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2E35C3A293E645900D5F0E3 /* Assets.xcassets */; };
@@ -39,9 +40,10 @@
 		E2A8AC642961EAA700B96EE2 /* RightMenuContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMenuContainer.swift; sourceTree = "<group>"; };
 		E2B4AF6E296201EC00C71774 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		E2BDB4B2296E305300CBDB48 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E2E35C33293E645800D5F0E3 /* RapidSnap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RapidSnap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E35C36293E645800D5F0E3 /* coolshotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coolshotApp.swift; sourceTree = "<group>"; };
-		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		E2E35C38293E645800D5F0E3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditorView.swift; path = ../EditorView.swift; sourceTree = "<group>"; };
 		E2E35C3A293E645900D5F0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E35C3D293E645900D5F0E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E2E35C3F293E645900D5F0E3 /* rapidsnap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = rapidsnap.entitlements; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		E2850A45295BB67A00F6E95B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				E2E35C38293E645800D5F0E3 /* EditorView.swift */,
 				E2850A46295BB68A00F6E95B /* Preferences.swift */,
 				E2B4AF73296219AE00C71774 /* WelcomeScreen.swift */,
 			);
@@ -113,6 +116,14 @@
 			path = "ui-elemnts";
 			sourceTree = "<group>";
 		};
+		E2BDB4B1296E303F00CBDB48 /* extentions */ = {
+			isa = PBXGroup;
+			children = (
+				E2BDB4B2296E305300CBDB48 /* Image.swift */,
+			);
+			path = extentions;
+			sourceTree = "<group>";
+		};
 		E2E35C2A293E645800D5F0E3 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +143,7 @@
 		E2E35C35293E645800D5F0E3 /* rapidsnap */ = {
 			isa = PBXGroup;
 			children = (
+				E2BDB4B1296E303F00CBDB48 /* extentions */,
 				E2A8AC632961EA7200B96EE2 /* ui-elemnts */,
 				E2850A4B295BE53700F6E95B /* utils */,
 				E2850A48295BB78F00F6E95B /* actions */,
@@ -141,7 +153,6 @@
 				E27CA0E42950C1A700A7B7EE /* Shapes */,
 				E2E6180F2946036800CF1EAF /* ViewModel */,
 				E2E35C36293E645800D5F0E3 /* coolshotApp.swift */,
-				E2E35C38293E645800D5F0E3 /* EditorView.swift */,
 				E2E35C3A293E645900D5F0E3 /* Assets.xcassets */,
 				E2E35C3F293E645900D5F0E3 /* rapidsnap.entitlements */,
 				E2E35C3C293E645900D5F0E3 /* Preview Content */,
@@ -249,6 +260,7 @@
 				E2850A44295BB64600F6E95B /* hotkey.swift in Sources */,
 				E2E35C46293E6F3600D5F0E3 /* ScreenCapture.swift in Sources */,
 				E2E35C37293E645800D5F0E3 /* coolshotApp.swift in Sources */,
+				E2BDB4B3296E305300CBDB48 /* Image.swift in Sources */,
 				E2B4AF74296219AE00C71774 /* WelcomeScreen.swift in Sources */,
 				E2E618112946038C00CF1EAF /* EditorViewModel.swift in Sources */,
 				E2A8AC652961EAA700B96EE2 /* RightMenuContainer.swift in Sources */,
@@ -391,6 +403,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"rapidsnap/Preview Content\"";
 				DEVELOPMENT_TEAM = 7CE3E2W6XY;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rapidsnap/Info.plist;
@@ -423,6 +436,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"rapidsnap/Preview Content\"";
 				DEVELOPMENT_TEAM = 7CE3E2W6XY;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rapidsnap/Info.plist;

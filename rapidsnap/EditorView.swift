@@ -18,9 +18,12 @@ struct EditorView: View {
     @State private var selectedColorsIndex: Int
     
     @State private var thickness: Double
+    
     @State private var padding: Double
     @State private var cornerRadius: Double
-
+    @State private var implicit: Double = 0
+    @State private var originalBackgroundColor: Color
+    
     @State private var selectedShapeColor: Color = .white
     @State private var background: Bool
     @State private var shapeFill: Bool
@@ -49,7 +52,7 @@ struct EditorView: View {
         self.background = Storage.shared.value(.background, defaultValue: true) as! Bool
         self.shapeFill = Storage.shared.value(.shapeFill, defaultValue: true) as! Bool
         
-        
+        self.originalBackgroundColor = image.image.getEdgeColor()
     }
     
     var editorView: some View {
@@ -63,11 +66,20 @@ struct EditorView: View {
                     .frame(width: imageModel.width + self.padding, height: imageModel.height + self.padding)
                 }
                 
+                if self.implicit > 0 {
+                    Rectangle()
+                        .fill(self.originalBackgroundColor)
+                        .cornerRadius(self.cornerRadius)
+                        .frame(width: imageModel.width + self.implicit + self.cornerRadius, height: imageModel.height + self.implicit + self.cornerRadius)
+                }
+                
                 Image(nsImage: (imageModel.image))
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(self.cornerRadius)
+                    .cornerRadius(self.implicit == 0 ? self.cornerRadius : 0)
                     .frame(width: imageModel.width, height: imageModel.height)
+                    
+
             }
             
             ForEach(shapes.filter{ $0.type == .rectangle }, id: \.self) { shape in
@@ -214,6 +226,20 @@ struct EditorView: View {
                         }
                         
                         HStack(alignment: .firstTextBaseline) {
+                            Text("Implicit")
+                                .frame(width: 60)
+                            
+                            Slider(value: $implicit, in: 1...(max(self.padding-50, self.implicit))).frame(maxWidth: 200)
+                                .onChange(of: implicit) { val in
+                                    self.implicit = val
+                                }
+                            
+                            Spacer()
+                            
+                            ColorPicker("", selection: $originalBackgroundColor)
+                        }
+                        
+                        HStack(alignment: .firstTextBaseline) {
                             Text("Radius")
                                 .foregroundColor(.white)
                                 .frame(width: 60)
@@ -290,7 +316,7 @@ struct EditorView: View {
                 
                 Spacer() // to stick items to the top always
             }
-            .frame(width: 250)
+            .frame(width: 300)
             .clipped()
         }
     }
