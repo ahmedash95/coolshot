@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 import AppKit
 
+extension NSView {
+    func snapShot() -> NSImage {
+        let imageRepresentation = bitmapImageRepForCachingDisplay(in: bounds)!
+        cacheDisplay(in: bounds, to: imageRepresentation)
+        return NSImage(cgImage: imageRepresentation.cgImage!, size: bounds.size)
+    }
+}
+
 class EditorViewModel {
     
     var screenCapture = ScreenCapture()
@@ -32,8 +40,8 @@ class EditorViewModel {
         [.black],
     ]
     
-    @MainActor func copyToClipboard(view: some View) {
-        guard let output = self.getImageFromView(view: view) else {
+    @MainActor func copyToClipboard(view: some View, bounds: NSSize) {
+        guard let output = self.getImageFromView(view: view, bounds: bounds) else {
             return
         }
         
@@ -42,8 +50,8 @@ class EditorViewModel {
         pb.writeObjects([output])
     }
     
-    @MainActor func saveToFile(view: some View) {
-        guard let output = self.getImageFromView(view: view) else {
+    @MainActor func saveToFile(view: some View, bounds: NSSize) {
+        guard let output = self.getImageFromView(view: view, bounds: bounds) else {
             return
         }
         
@@ -52,11 +60,11 @@ class EditorViewModel {
         }
     }
     
-    @MainActor func getImageFromView(view: some View) -> NSImage? {
-        let renderer = ImageRenderer(content: view)
-        renderer.scale = 2.0
+    @MainActor func getImageFromView(view: some View, bounds: NSSize) -> NSImage? {
+        let nsview = NSHostingView(rootView: view)
+        nsview.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         
-        return renderer.nsImage!
+        return nsview.snapShot()
     }
     
     func showSavePanel() -> URL? {
