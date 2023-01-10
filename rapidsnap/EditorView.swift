@@ -258,7 +258,10 @@ struct EditorView: View {
 
                 HStack(alignment: .bottom) {
                     Button("Copy ⌘C") {
-                        editorViewModel.copyToClipboard(view: editorView)
+                        var size = imageModel.image.size
+                        size.width += self.padding
+                        size.height += self.padding
+                        editorViewModel.copyToClipboard(view: editorView, bounds: size)
                         if let close = Storage.shared.value(.autoclose_on_copy, defaultValue: true) as? Bool {
                             if close {
                                 NSApplication.shared.keyWindow?.close()
@@ -270,7 +273,10 @@ struct EditorView: View {
                     .background(Color("Buttons"))
                     
                     Button("Save ⌘S") {
-                        editorViewModel.saveToFile(view: editorView)
+                        var size = imageModel.image.size
+                        size.width += self.padding
+                        size.height += self.padding
+                        editorViewModel.saveToFile(view: editorView, bounds: size)
                     }.keyboardShortcut("S")
                     
                     Button("Undo ⌘Z") {
