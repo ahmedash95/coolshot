@@ -22,19 +22,51 @@ struct MenuBarActions {
         window.makeKeyAndOrderFront(nil)
     }
     
+    static func SelectFileAndOpenEditor() {
+        let panel = NSOpenPanel()
+        panel.title = "Select Image"
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.canChooseFiles = true
+        panel.canCreateDirectories = false
+        panel.allowedContentTypes = [.jpeg,.png,.tiff,.image]
+        if panel.runModal() == .OK {
+            guard let url = panel.url else { return }
+            guard let image = NSImage(contentsOf: url) else { return }
+            OpenEditor(model: ImageModel(image: image))
+        }
+    }
+    
+    
+    static func copyFromClipboardAndOpenEditor() {
+        let contents = NSPasteboard.general.readObjects(forClasses: [NSImage.self])
+        let images = contents as! [NSImage]
+        if images.count > 0 {
+            guard let image = images.first else {
+                return
+            }
+            OpenEditor(model: ImageModel(image: image))
+        }
+    }
+    
     static func captureScreenAndOpenEditor() {
-        NSApp.setActivationPolicy(.regular)
-        NSApp.activate(ignoringOtherApps: true)
-        
         guard let image = ScreenCapture().captureSelection() else {
             return
         }
                 
-        let view = EditorView(image: ImageModel(image: image))
+        OpenEditor(model: ImageModel(image: image))
+    }
+    
+    
+    static func OpenEditor(model: ImageModel) {
+        NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
+
+        let view = EditorView(image: model)
         
         // open a new window with the editor view
         let window = ClosableWindow(
-            contentRect: NSRect(x: 0, y: 0, width: min(max(1200, image.size.width), 1700), height: min(max(500, image.size.height), 1000)),
+            contentRect: NSRect(x: 0, y: 0, width: min(max(1200, model.image.size.width), 1700), height: min(max(500, model.image.size.height), 1000)),
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered, defer: false)
         window.center()
