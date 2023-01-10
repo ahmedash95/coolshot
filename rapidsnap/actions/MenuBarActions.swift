@@ -10,8 +10,8 @@ import SwiftUI
 
 struct MenuBarActions {
     static func requestScreenAccess() {
-        NSApp.activate(ignoringOtherApps: true)
         NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
         
         let window = ClosableWindow(
             contentRect: NSRect(x: 0, y: 0, width: 500, height: 200),
@@ -23,8 +23,8 @@ struct MenuBarActions {
     }
     
     static func captureScreenAndOpenEditor() {
-        NSApp.activate(ignoringOtherApps: true)
         NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
         
         guard let image = ScreenCapture().captureSelection() else {
             return
@@ -51,8 +51,8 @@ struct MenuBarActions {
     }
     
     static func openPreferences() {
-        NSApp.activate(ignoringOtherApps: true)
         NSApp.setActivationPolicy(.regular)
+        NSApp.activate(ignoringOtherApps: true)
         
         let window = ClosableWindow(
             contentRect: NSRect(x: 0, y: 0, width: 350, height: 300),

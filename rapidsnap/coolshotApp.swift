@@ -74,7 +74,12 @@ struct coolshotApp: App {
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }.keyboardShortcut("q")
-        }.menuBarExtraStyle(.menu)
+        }
+        .menuBarExtraStyle(.menu)
+        .commands {
+            CommandGroup(replacing: .pasteboard) { }
+            CommandGroup(replacing: .undoRedo) { }
+        }
     }
 }
 
